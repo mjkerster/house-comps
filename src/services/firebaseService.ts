@@ -47,3 +47,5 @@ export const signInWithGoogle = async () => {
     console.error(err);
   }
 };
+
+export const signOutOfGoogle = () => signOut(auth);
