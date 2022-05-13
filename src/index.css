@@ -29,13 +29,21 @@
   url("./fonts/Poppins-ExtraBold.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Millenia";
+  src: local("Millenia"),
+  url("./fonts/Millenia-Regular.ttf") format("truetype");
+}
+
 html {
   height: -webkit-fill-available;
+  background: #F5F5F6;
 }
 
 body {
-  min-height: "100vh";
+  /* min-height: "100vh"; */
   min-height: -webkit-fill-available;
   display: flex; 
   flex-direction: column;
+  
 }

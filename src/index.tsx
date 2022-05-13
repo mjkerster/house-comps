@@ -8,11 +8,13 @@ import './index.css';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { HcThemeOptions } from './app/theme';
 import { BrowserRouter } from 'react-router-dom';
+import { initializeFirebase } from './services/firebaseService';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 const theme = createTheme(HcThemeOptions);
+initializeFirebase();
 
 root.render(
   <React.StrictMode>
