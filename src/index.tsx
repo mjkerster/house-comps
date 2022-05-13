@@ -5,16 +5,25 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { HcThemeOptions } from './app/theme';
+import { BrowserRouter } from 'react-router-dom';
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+const theme = createTheme(HcThemeOptions);
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

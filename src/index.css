@@ -1,13 +1,41 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@font-face {
+  font-family: "PoppinsMedium";
+  src: local("PoppinsMedium"),
+  url("./fonts/Poppins-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PoppinsLight";
+  src: local("PoppinsLight"),
+  url("./fonts/Poppins-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PoppinsBold";
+  src: local("PoppinsBold"),
+  url("./fonts/Poppins-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PoppinsRegular";
+  src: local("PoppinsRegular"),
+  url("./fonts/Poppins-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PoppinsSemiBold";
+  src: local("PoppinsSemiBold"),
+  url("./fonts/Poppins-SemiBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PoppinsExtraBold";
+  src: local("PoppinsExtraBold"),
+  url("./fonts/Poppins-ExtraBold.ttf") format("truetype");
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  height: -webkit-fill-available;
+}
+
+body {
+  min-height: "100vh";
+  min-height: -webkit-fill-available;
+  display: flex; 
+  flex-direction: column;
 }
