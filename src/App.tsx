@@ -4,6 +4,7 @@ import RequireAuth from './features/Auth/RequireAuth';
 import Login from './features/Auth/Login';
 import MainLayout from './features/Shared/MainLayout';
 import Properties from './features/Properties/Properties';
+import AddProperty from './features/Properties/AddProperty';
 
 function App() {
   return (
@@ -20,6 +21,14 @@ function App() {
         {' '}
         <Route index element={<Properties />} />
       </Route>
+      <Route
+        path="/add"
+        element={
+          <RequireAuth>
+            <AddProperty />
+          </RequireAuth>
+        }
+      />
     </Routes>
   );
 }

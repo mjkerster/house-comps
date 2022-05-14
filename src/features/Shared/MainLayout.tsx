@@ -9,10 +9,11 @@ import {
   useScrollTrigger,
 } from '@mui/material';
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const MainLayout = () => {
   const trigger = useScrollTrigger();
+  const navigate = useNavigate();
   return (
     <Box height={'inherit'}>
       <AppBar position="static">
@@ -33,6 +34,7 @@ const MainLayout = () => {
             right: '40px',
           }}
           color="secondary"
+          onClick={() => navigate('add')}
         >
           <Add />
           {!trigger ? 'Add' : ''}
