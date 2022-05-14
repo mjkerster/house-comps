@@ -6,7 +6,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 const RequireAuth = ({ children }: { children: JSX.Element }) => {
   const [user, loading] = useAuthState(getFirebaseAuth());
   const location = useLocation();
-  console.log(user);
   if (!loading && user === null) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them

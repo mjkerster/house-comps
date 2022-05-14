@@ -1,6 +1,7 @@
 import { Add } from '@mui/icons-material';
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
   Container,
@@ -9,19 +10,26 @@ import {
   useScrollTrigger,
 } from '@mui/material';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { getFirebaseAuth } from '../../services/firebaseService';
 
 const MainLayout = () => {
   const trigger = useScrollTrigger();
   const navigate = useNavigate();
+  const [user] = useAuthState(getFirebaseAuth());
   return (
     <Box height={'inherit'}>
       <AppBar position="static">
         <Container maxWidth={'sm'}>
-          <Toolbar variant="dense" disableGutters>
+          <Toolbar disableGutters>
             <Typography fontFamily={'Millenia'} variant="h2">
               HC
             </Typography>
+            <Avatar
+              src={user?.photoURL ? user?.photoURL : undefined}
+              sx={{ marginLeft: 'auto' }}
+            />
           </Toolbar>
         </Container>
       </AppBar>

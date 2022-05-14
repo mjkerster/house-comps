@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "HouseComps",
+  "name": "House Comps",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +8,18 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
+      "src": "/android-chrome-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+  },
     {
-      "src": "logo512.png",
+      "src": "mstile-150X150.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "150x150"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#304ffe",
+  "background_color": "#F5F5F6"
 }
