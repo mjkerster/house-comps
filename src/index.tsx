@@ -5,7 +5,7 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import { createTheme, ThemeProvider } from '@mui/material';
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { HcThemeOptions } from './app/theme';
 import { BrowserRouter } from 'react-router-dom';
 import { initializeFirebase } from './services/firebaseService';
@@ -21,6 +21,7 @@ root.render(
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <BrowserRouter>
+          <CssBaseline />
           <App />
         </BrowserRouter>
       </ThemeProvider>
