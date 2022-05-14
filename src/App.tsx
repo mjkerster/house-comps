@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import RequireAuth from './features/Auth/RequireAuth';
 import Login from './features/Auth/Login';
