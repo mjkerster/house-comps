@@ -12,7 +12,15 @@ import {
   UserCredential,
   User,
 } from 'firebase/auth';
-import { child, Database, get, getDatabase, ref, set } from 'firebase/database';
+import {
+  child,
+  Database,
+  get,
+  getDatabase,
+  ref,
+  set,
+  push,
+} from 'firebase/database';
 
 let app;
 let auth: Auth;
@@ -27,6 +35,7 @@ export const initializeFirebase = () => {
 };
 
 export const getFirebaseAuth = (): Auth => auth;
+export const getFirebaseDatabase = (): Database => db;
 
 export const signInWithGoogle = async () => {
   try {
@@ -48,4 +57,17 @@ export const signInWithGoogle = async () => {
   }
 };
 
+export const postProperty = (property: Property): any => {
+  return push(ref(db, 'properties'), property);
+};
+
 export const signOutOfGoogle = () => signOut(auth);
+
+export interface Property {
+  url: string;
+  favorite: boolean;
+  entryDateTime: string;
+  listPrice?: string;
+  salePrice?: string;
+  address?: string;
+}
