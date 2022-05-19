@@ -25,6 +25,7 @@ const AddProperty = () => {
       listPrice,
       salePrice,
       favorite,
+      address: url.split('/')[4].replaceAll('-', ' '),
       entryDateTime: new Date().toISOString(),
     });
     navigate(-1);

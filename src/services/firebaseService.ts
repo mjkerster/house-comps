@@ -66,8 +66,8 @@ export const signOutOfGoogle = () => signOut(auth);
 export interface Property {
   url: string;
   favorite: boolean;
+  address: string;
   entryDateTime: string;
   listPrice?: string;
   salePrice?: string;
-  address?: string;
 }

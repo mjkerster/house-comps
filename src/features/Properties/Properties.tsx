@@ -23,6 +23,7 @@ const Properties = () => {
   if (loading) {
     return <Typography>Loading</Typography>;
   }
+
   return (
     <Box mx={2} my={3}>
       <Stack spacing={3}>
@@ -30,7 +31,13 @@ const Properties = () => {
           return (
             <Card sx={{ minWidth: 275 }} key={property.key}>
               <CardContent>
-                <Typography gutterBottom>{property.val().url}</Typography>
+                <Typography
+                  gutterBottom
+                  variant="body1"
+                  textTransform={'capitalize'}
+                >
+                  {property.val().address}
+                </Typography>
               </CardContent>
               <CardActions disableSpacing>
                 <IconButton
