@@ -11,14 +11,16 @@ import {
   Theme,
 } from '@mui/material';
 import React from 'react';
-import { DataSnapshot, ref } from 'firebase/database';
+import { DataSnapshot, orderByChild, query, ref } from 'firebase/database';
 import { useList } from 'react-firebase-hooks/database';
 import { getFirebaseDatabase } from '../../services/firebaseService';
 
 const Properties = () => {
-  const [snapshots, loading] = useList(
+  const ordered = query(
     ref(getFirebaseDatabase(), 'properties'),
+    orderByChild('entryDateTime'),
   );
+  const [snapshots, loading] = useList(ordered);
 
   if (loading) {
     return <Typography>Loading</Typography>;
@@ -27,7 +29,7 @@ const Properties = () => {
   return (
     <Box mx={2} my={3}>
       <Stack spacing={3}>
-        {snapshots?.map((property: DataSnapshot) => {
+        {snapshots?.reverse().map((property: DataSnapshot) => {
           return (
             <Card sx={{ minWidth: 275 }} key={property.key}>
               <CardContent>
