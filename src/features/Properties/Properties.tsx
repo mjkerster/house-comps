@@ -1,4 +1,4 @@
-import { Favorite } from '@mui/icons-material';
+import { Edit, Favorite } from '@mui/icons-material';
 import {
   Box,
   Card,
@@ -8,6 +8,7 @@ import {
   Button,
   IconButton,
   Stack,
+  Theme,
 } from '@mui/material';
 import React from 'react';
 import { DataSnapshot, ref } from 'firebase/database';
@@ -15,7 +16,6 @@ import { useList } from 'react-firebase-hooks/database';
 import { getFirebaseDatabase } from '../../services/firebaseService';
 
 const Properties = () => {
-  // const [color, setColor] = useState('rgba(0, 0, 0, 0.54)');
   const [snapshots, loading] = useList(
     ref(getFirebaseDatabase(), 'properties'),
   );
@@ -31,25 +31,46 @@ const Properties = () => {
           return (
             <Card sx={{ minWidth: 275 }} key={property.key}>
               <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="body1"
-                  textTransform={'capitalize'}
-                >
-                  {property.val().address}
-                </Typography>
+                <Box>
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    textTransform={'capitalize'}
+                  >
+                    {property.val().address}
+                  </Typography>
+                </Box>
+                <Box marginTop={2} display="flex" flexDirection="row">
+                  <Box marginX={1}>
+                    <Typography
+                      variant="caption"
+                      color={(theme: Theme) => theme.palette.text.secondary}
+                    >
+                      List Price
+                    </Typography>
+                    <Typography variant="body2">
+                      {property.val().listPrice
+                        ? property.val().listPrice
+                        : 'NA'}
+                    </Typography>
+                  </Box>
+                  <Box marginX={5}>
+                    <Typography
+                      variant="caption"
+                      color={(theme: Theme) => theme.palette.text.secondary}
+                    >
+                      Sale Price
+                    </Typography>
+                    <Typography variant="body2">
+                      {property.val().salePrice
+                        ? property.val().salePrice
+                        : 'NA'}
+                    </Typography>
+                  </Box>
+                </Box>
               </CardContent>
               <CardActions disableSpacing>
-                <IconButton
-                  aria-label="add to favorites"
-                  // onClick={() => {
-                  //   if (color === '#fe304f') {
-                  //     setColor('rgba(0, 0, 0, 0.54)');
-                  //   } else {
-                  //     setColor('#fe304f');
-                  //   }
-                  // }}
-                >
+                <IconButton aria-label="add to favorites">
                   <Favorite
                     htmlColor={
                       property.val().favorite
@@ -57,6 +78,12 @@ const Properties = () => {
                         : 'rgba(0, 0, 0, 0.54)'
                     }
                   />
+                </IconButton>
+                <IconButton
+                  aria-label="edit property"
+                  onClick={() => alert('Coming Soon')}
+                >
+                  <Edit />
                 </IconButton>
                 <Button
                   variant="text"

@@ -10,20 +10,23 @@ import {
 import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postProperty } from '../../services/firebaseService';
+import HcDollarInput from '../Shared/HcDollarInput';
 
 const AddProperty = () => {
   const navigate = useNavigate();
   const [color, setColor] = useState('rgba(0, 0, 0, 0.54)');
   const [url, setUrl] = useState('');
   const [listPrice, setListPrice] = useState('');
+  const [formatListPrice, setFormatListPrice] = useState('');
   const [salePrice, setSalePrice] = useState('');
+  const [formatSalePrice, setFormatSalePrice] = useState('');
   const [favorite, setFavorite] = useState(false);
 
   const submitProperty = () => {
     postProperty({
       url,
-      listPrice,
-      salePrice,
+      listPrice: formatListPrice,
+      salePrice: formatSalePrice,
       favorite,
       address: url.split('/')[4].replaceAll('-', ' '),
       entryDateTime: new Date().toISOString(),
@@ -46,19 +49,21 @@ const AddProperty = () => {
             setUrl(evt.target.value)
           }
         />
-        <TextField
+        <HcDollarInput
           label="List Price (Optional)"
           value={listPrice}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-            setListPrice(evt.target.value)
-          }
+          onChange={(evt: any) => {
+            setListPrice(evt.target.value);
+            setFormatListPrice(evt.target.format);
+          }}
         />
-        <TextField
+        <HcDollarInput
           label="Sale Price (Optional)"
           value={salePrice}
-          onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-            setSalePrice(evt.target.value)
-          }
+          onChange={(evt: any) => {
+            setSalePrice(evt.target.value);
+            setFormatSalePrice(evt.target.format);
+          }}
         />
         <Box display={'flex'} flexDirection="row" alignItems={'center'}>
           <IconButton
