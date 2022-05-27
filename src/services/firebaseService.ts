@@ -20,7 +20,10 @@ import {
   ref,
   set,
   push,
+  update,
+  remove,
 } from 'firebase/database';
+import { EditProperty } from '../features/Properties/PropertySlice';
 
 let app;
 let auth: Auth;
@@ -59,6 +62,22 @@ export const signInWithGoogle = async () => {
 
 export const postProperty = (property: Property): any => {
   return push(ref(db, 'properties'), property);
+};
+
+export const updateProperty = (property: EditProperty): any => {
+  const { key, ...other } = property;
+  const updates: any = {};
+  if (key === null) {
+    throw new Error('No "key" found for update');
+  }
+  updates[key] = other;
+  return update(ref(db, 'properties'), updates);
+};
+export const deleteProperty = (key: string | null): Promise<void> => {
+  if (key === null) {
+    throw new Error('No "key" found for delete');
+  }
+  return remove(ref(db, `properties/${key}`));
 };
 
 export const signOutOfGoogle = () => signOut(auth);
