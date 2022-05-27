@@ -23,9 +23,13 @@ const EditProperty = () => {
   );
   const [url, setUrl] = useState(editProperty.url);
   const [listPrice, setListPrice] = useState(editProperty.listPrice?.slice(1));
-  const [formatListPrice, setFormatListPrice] = useState('');
+  const [formatListPrice, setFormatListPrice] = useState(
+    editProperty.listPrice,
+  );
   const [salePrice, setSalePrice] = useState(editProperty.salePrice?.slice(1));
-  const [formatSalePrice, setFormatSalePrice] = useState('');
+  const [formatSalePrice, setFormatSalePrice] = useState(
+    editProperty.salePrice,
+  );
   const [favorite, setFavorite] = useState(editProperty.favorite);
 
   const editPropertyClick = () => {
@@ -36,7 +40,7 @@ const EditProperty = () => {
       salePrice: formatSalePrice,
       favorite,
       address: url.split('/')[4].replaceAll('-', ' '),
-      entryDateTime: new Date().toISOString(),
+      entryDateTime: editProperty.entryDateTime,
     });
     navigate(-1);
     appDispatch(PropertyActions.clearEditProperty());
