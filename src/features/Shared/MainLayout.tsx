@@ -40,6 +40,9 @@ const MainLayout = () => {
             position: 'fixed',
             bottom: '40px',
             right: '40px',
+            minWidth: '0px',
+            transition: 'width ease .5s',
+            width: !trigger ? '90px' : '56px',
           }}
           color="secondary"
           onClick={() => navigate('add')}

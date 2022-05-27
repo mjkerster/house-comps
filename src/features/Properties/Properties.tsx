@@ -33,7 +33,7 @@ const Properties = () => {
 
   return (
     <Box mx={2} my={3}>
-      <Stack spacing={3}>
+      <Stack spacing={3} marginBottom={20}>
         {snapshots?.reverse().map((property: DataSnapshot) => {
           const propertyVal: Property = property.val();
           return (
