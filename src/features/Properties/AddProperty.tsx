@@ -7,9 +7,13 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { DataSnapshot, get } from 'firebase/database';
 import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { postProperty } from '../../services/firebaseService';
+import {
+  findPropertyByAddressQuery,
+  postProperty,
+} from '../../services/firebaseService';
 import HcDollarInput from '../Shared/HcDollarInput';
 
 const AddProperty = () => {
@@ -21,7 +25,21 @@ const AddProperty = () => {
   const [salePrice, setSalePrice] = useState('');
   const [formatSalePrice, setFormatSalePrice] = useState('');
   const [favorite, setFavorite] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
+  const blurValidation = async () => {
+    if (url !== '') {
+      const snap: DataSnapshot = await get(
+        findPropertyByAddressQuery(url.split('/')[4].replaceAll('-', ' ')),
+      );
+
+      if (snap.exists()) {
+        setIsDuplicate(true);
+      } else {
+        setIsDuplicate(false);
+      }
+    }
+  };
   const submitProperty = () => {
     postProperty({
       url,
@@ -45,9 +63,14 @@ const AddProperty = () => {
           required
           label="Property URL"
           value={url}
+          onBlur={() => {
+            blurValidation();
+          }}
           onChange={(evt: ChangeEvent<HTMLInputElement>) =>
             setUrl(evt.target.value)
           }
+          error={isDuplicate}
+          helperText={isDuplicate ? 'This is a duplicate entry' : undefined}
         />
         <HcDollarInput
           label="List Price (Optional)"
@@ -83,7 +106,11 @@ const AddProperty = () => {
           <Typography> Favorite?</Typography>
         </Box>
         <Box display={'flex'} justifyContent="center">
-          <Button startIcon={<Save />} onClick={submitProperty}>
+          <Button
+            startIcon={<Save />}
+            onClick={submitProperty}
+            disabled={isDuplicate || url === ''}
+          >
             Submit Property
           </Button>
         </Box>

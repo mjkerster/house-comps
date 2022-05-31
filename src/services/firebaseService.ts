@@ -22,6 +22,10 @@ import {
   push,
   update,
   remove,
+  orderByChild,
+  query,
+  equalTo,
+  Query,
 } from 'firebase/database';
 import { EditProperty } from '../features/Properties/PropertySlice';
 
@@ -64,6 +68,13 @@ export const postProperty = (property: Property): any => {
   return push(ref(db, 'properties'), property);
 };
 
+export const findPropertyByAddressQuery = (address: string): Query => {
+  return query(
+    ref(db, 'properties'),
+    orderByChild('address'),
+    equalTo(address),
+  );
+};
 export const updateProperty = (property: EditProperty): any => {
   const { key, ...other } = property;
   const updates: any = {};
