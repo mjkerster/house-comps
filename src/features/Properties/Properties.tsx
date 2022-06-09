@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { PropertyActions } from './PropertySlice';
 import { useAppDispatch } from '../../app/hooks';
 import HcListFilter, { FilterItemType } from '../Shared/HcListFilter';
+import { Utils } from '../../services/utils';
 
 const Properties = () => {
   const navigate = useNavigate();
@@ -75,6 +76,17 @@ const Properties = () => {
             return (
               <Card sx={{ minWidth: 275 }} key={property.key}>
                 <CardContent>
+                  <Box display="flex" flexDirection={'row-reverse'}>
+                    <Typography
+                      gutterBottom
+                      variant="caption"
+                      textTransform={'capitalize'}
+                      textAlign="right"
+                      color={(theme: Theme) => theme.palette.text.secondary}
+                    >
+                      {Utils.getShortFormDateUtc(propertyVal.entryDateTime)}
+                    </Typography>
+                  </Box>
                   <Box>
                     <Typography
                       gutterBottom
@@ -105,6 +117,21 @@ const Properties = () => {
                       </Typography>
                       <Typography variant="body2">
                         {propertyVal.salePrice ? propertyVal.salePrice : 'NA'}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="caption"
+                        color={(theme: Theme) => theme.palette.text.secondary}
+                      >
+                        Since Entry
+                      </Typography>
+                      <Typography variant="body2">
+                        {`${Math.abs(
+                          Utils.numberofDaysFromToday(
+                            propertyVal.entryDateTime,
+                          ),
+                        )} days`}
                       </Typography>
                     </Box>
                   </Box>
